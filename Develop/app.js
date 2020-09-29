@@ -13,11 +13,107 @@ const render = require("./lib/htmlRenderer");
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
+const questions = [
+    {
+        type: "list",
+        message: "Who would like to add to your team?",
+        choices: ["A Manager", "An Engineer", "An Intern", "None"],
+        name: "role"
+    }
+];
+
+const managerQuestions = [
+    {
+        type: "input",
+        message: "What is your manager's name?",
+        name: "name",
+    },
+    {
+        type: "input",
+        message: "What is your manager's email?",
+        name: "email",
+    },
+    {
+        type: "input",
+        message: "What is your manager's ID number?",
+        name: "id",
+    },
+    {
+        type: "input",
+        message: "What is your manager's office number?",
+        name: "officeNumber",
+    }
+];
+
+const engineerQuestions = [
+    {
+        type: "input",
+        message: "What is your engineer's name?",
+        name: "name",
+    },
+    {
+        type: "input",
+        message: "What is your engineer's email?",
+        name: "email",
+    },
+    {
+        type: "input",
+        message: "What is your engineer's ID number?",
+        name: "id",
+    },
+    {
+        type: "input",
+        message: "What is your engineer's Github username?",
+        name: "github",
+    }
+];
+
+const internQuestions = [
+    {
+        type: "input",
+        message: "What is your intern's name?",
+        name: "name",
+    },
+    {
+        type: "input",
+        message: "What is your intern's email?",
+        name: "email",
+    },
+    {
+        type: "input",
+        message: "What is your intern's ID number?",
+        name: "id",
+    },
+    {
+        type: "input",
+        message: "What is your intern's school name?",
+        name: "school",
+    }
+];
+
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
-
+function init () {
+    inquirer.prompt(questions)
+    .then(function(response){
+        switch (response.employee) {
+            case "A Manager":
+                manager()
+                break;
+            case "An Engineer":
+                engineer()
+                break;
+            case "An Intern":
+                intern()
+                break;
+            case "None":
+                render(team)
+                break;
+        }
+    });
+}
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
 // `output` folder. You can use the variable `outputPath` above target this location.
@@ -33,3 +129,4 @@ const render = require("./lib/htmlRenderer");
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
+init();

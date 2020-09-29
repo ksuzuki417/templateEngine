@@ -4,7 +4,7 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
-
+const team = [];
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
@@ -98,7 +98,7 @@ const internQuestions = [
 function init () {
     inquirer.prompt(questions)
     .then(function(response){
-        switch (response.employee) {
+        switch (response.role) {
             case "A Manager":
                 manager()
                 break;
@@ -114,6 +114,33 @@ function init () {
         }
     });
 }
+
+function manager () {
+    inquirer.prompt(managerQuestions)
+    .then(function (response) {
+        const newMgr = new Manager(response.name, response.email, response.id, response.officeNumber)
+        team.push(newMgr)
+        init()
+    })
+}
+function engineer () {
+    inquirer.prompt(engineerQuestions)
+    .then(function (response) {
+        const newEng = new Engineer(response.name, response.email, response.id, response.github)
+        team.push(newEng)
+        init()
+    })
+}
+function intern () {
+    inquirer.prompt(internQuestions)
+    .then(function (response) {
+        const newInt = new Intern(response.name, response.email, response.id, response.school)
+        team.push(newInt)
+        init()
+    })
+}
+
+
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
 // `output` folder. You can use the variable `outputPath` above target this location.

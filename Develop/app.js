@@ -127,9 +127,6 @@ function manager () {
         team.push(newMgr)
         newTeam();    
     })
-    .then(function() {
-        console.log("a manager is added!")
-    })
     .catch(function(err) {
         console.log(err);
     })
@@ -141,9 +138,6 @@ function engineer () {
         team.push(newEng)
         newTeam();
     })
-    .then(function() {
-        console.log("an engineer is added!")
-    })
     .catch(function(err) {
         console.log(err);
     })
@@ -154,9 +148,6 @@ function intern () {
         const newInt = new Intern(response.name, response.email, response.id, response.school)
         team.push(newInt)
         newTeam();
-    })
-    .then(function() {
-        console.log("an intern is added!")
     })
     .catch(function(err) {
         console.log(err);

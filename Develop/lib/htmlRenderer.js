@@ -57,7 +57,7 @@ const renderMain = html => {
   const template = fs.readFileSync(path.resolve(templatesDir, "main.html"), "utf8");
   const mainHTML = replacePlaceholders(template, "team", html);
   const file = path.join(__dirname, "../output", "team.html");
-  fs.writeFile(file, mainHTML, function (err) {
+  fs.writeFileSync(file, mainHTML, function (err) {
     if (err) {
       throw (err)
     }

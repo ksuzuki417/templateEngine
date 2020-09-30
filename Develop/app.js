@@ -170,13 +170,13 @@ function intern () {
 // Hint: you may need to check if the `output` folder exists and create it if it
 // does not.
 
-function generateTeam() {
-    if (!fs.existsSync(outputPath)) {
-        fs.mkdirSync(outputPath)
-    };
-    fs.writeFileSync(outputPath, render(team), "utf-8");
-    console.log("Your team is complete!")
-}
+//function generateTeam() {
+    //if (!fs.existsSync(outputPath)) {
+        //fs.mkdirSync(outputPath)
+    //};
+    //fs.writeFileSync(outputPath, render(team), "utf-8");
+    //console.log("Your team is complete!")
+//}
 
 // HINT: each employee type (manager, engineer, or intern) has slightly different
 // information; write your code to ask different questions via inquirer depending on
@@ -187,7 +187,7 @@ function generateTeam() {
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
 
-generateTeam();
+//generateTeam();
 
 
 newTeam();

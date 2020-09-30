@@ -55,7 +55,13 @@ const renderIntern = intern => {
 
 const renderMain = html => {
   const template = fs.readFileSync(path.resolve(templatesDir, "main.html"), "utf8");
-  return replacePlaceholders(template, "team", html);
+  const mainHTML = replacePlaceholders(template, "team", html);
+  const file = path.join(__dirname, "../output", "team.html");
+  fs.writeFile(file, mainHTML, function (err) {
+    if (err) {
+      throw (err)
+    }
+  })
 };
 
 const replacePlaceholders = (template, placeholder, value) => {

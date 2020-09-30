@@ -11,15 +11,17 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 
 
+
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-const questions = [
+const keyQuestion = [
     {
         type: "list",
-        message: "Who would like to add to your team?",
-        choices: ["A Manager", "An Engineer", "An Intern", "None"],
+        message: "Which role would like to add to your team?",
+        choices: ["A Manager", "An Engineer", "An Intern", "Done"],
         name: "role"
-    }
+    },
+    
 ];
 
 const managerQuestions = [
@@ -96,7 +98,7 @@ const internQuestions = [
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
 function init () {
-    inquirer.prompt(questions)
+    inquirer.prompt(keyQuestion)
     .then(function(response){
         switch (response.role) {
             case "A Manager":
@@ -108,7 +110,7 @@ function init () {
             case "An Intern":
                 intern()
                 break;
-            case "None":
+            case "Done":
                 render(team)
                 break;
         }
@@ -147,10 +149,18 @@ function intern () {
 // Hint: you may need to check if the `output` folder exists and create it if it
 // does not.
 
+function generateTeam() {
+    if (!fs.existsSync(outputPath)) {
+        //fs.mkdirSync(outputPath)
+    };
+    fs.writeFileSync(outputPath, render(team), "utf-8");
+}
+
+generateTeam();
+
 // HINT: each employee type (manager, engineer, or intern) has slightly different
 // information; write your code to ask different questions via inquirer depending on
 // employee type.
-
 // HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
 // and Intern classes should all extend from a class named Employee; see the directions
 // for further information. Be sure to test out each class and verify it generates an

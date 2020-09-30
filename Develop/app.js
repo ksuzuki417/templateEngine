@@ -1,15 +1,18 @@
+//linking team info
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+// requirements
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+// an empty array for team members to be added
 const team = [];
+//output resulsts
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-
 
 
 // Write code to use inquirer to gather information about the development team members,
@@ -97,7 +100,7 @@ const internQuestions = [
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
-function init () {
+function newTeam () {
     inquirer.prompt(keyQuestion)
     .then(function(response){
         switch (response.role) {
@@ -122,25 +125,43 @@ function manager () {
     .then(function (response) {
         const newMgr = new Manager(response.name, response.email, response.id, response.officeNumber)
         team.push(newMgr)
-        init()
+        newTeam();    
     })
-}
+    .then(function() {
+        console.log("a manager is added!")
+    })
+    .catch(function(err) {
+        console.log(err);
+    })
+};
 function engineer () {
     inquirer.prompt(engineerQuestions)
     .then(function (response) {
         const newEng = new Engineer(response.name, response.email, response.id, response.github)
         team.push(newEng)
-        init()
+        newTeam();
     })
-}
+    .then(function() {
+        console.log("an engineer is added!")
+    })
+    .catch(function(err) {
+        console.log(err);
+    })
+};
 function intern () {
     inquirer.prompt(internQuestions)
     .then(function (response) {
         const newInt = new Intern(response.name, response.email, response.id, response.school)
         team.push(newInt)
-        init()
+        newTeam();
     })
-}
+    .then(function() {
+        console.log("an intern is added!")
+    })
+    .catch(function(err) {
+        console.log(err);
+    })
+};
 
 
 // After you have your html, you're now ready to create an HTML file using the HTML
@@ -151,12 +172,11 @@ function intern () {
 
 function generateTeam() {
     if (!fs.existsSync(outputPath)) {
-        //fs.mkdirSync(outputPath)
+        fs.mkdirSync(outputPath)
     };
     fs.writeFileSync(outputPath, render(team), "utf-8");
+    console.log("Your team is complete!")
 }
-
-generateTeam();
 
 // HINT: each employee type (manager, engineer, or intern) has slightly different
 // information; write your code to ask different questions via inquirer depending on
@@ -166,4 +186,8 @@ generateTeam();
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
-init();
+
+generateTeam();
+
+
+newTeam();

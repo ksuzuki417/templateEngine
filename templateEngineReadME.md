@@ -20,6 +20,7 @@
   Simply, run node app.js and follow the prompts. When you complete, choose "Done" and open up "team.html" file in "output" folder. 
 
   <img src="/Develop/templateEngineDemo.gif">
+  <img src="/Develop/templateEngineScreenShot.png">
  
   [Click Here for a Demo](https://drive.google.com/file/d/16QAXXUXBgAWe0pe8n91Ef8ciJ_EoxPZy/view)
 
